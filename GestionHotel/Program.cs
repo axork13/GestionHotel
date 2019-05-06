@@ -7,27 +7,86 @@ namespace GestionHotel
     {
         static void Main(string[] args)
         {
-            GestionClients.AffichageListeClient();
+            int choix;
 
-            GestionClients.AjouterClient();
+            do
+            {                
+                afficherMenu();
+                choix = Convert.ToInt32(Console.ReadLine());
 
-            GestionClients.AjouterClient();
+                if (choix == 1)
+                {
+                    int choixSousMenu;
+                    Console.Clear();
 
-            GestionClients.AjouterClient();
+                    do
+                    {                 
+                        afficherMenuClients();
+                        choixSousMenu = Convert.ToInt32(Console.ReadLine());
 
-            GestionClients.AffichageListeClient();
+                        switch (choixSousMenu)
+                        {
+                            case 1:
+                                GestionClients.AffichageListeClient();
+                                break;
+                            case 2:
+                                GestionClients.AjouterClient();
+                                break;
+                            case 3:
+                                GestionClients.SupprimerClient();
+                                break;
+                            case 4:
+                                choixSousMenu = 0;
+                                break;
+                        }
+                    } while (choixSousMenu != 0);
+                }
+                else if (choix == 2)
+                {
+                    int choixSousMenu;
+                    Console.Clear();
 
-            GestionClients.SupprimerClient();
+                    do
+                    {
+                        afficherMenuReservations();
+                        choixSousMenu = Convert.ToInt32(Console.ReadLine());
 
-            GestionClients.AffichageListeClient();
+                        switch (choixSousMenu)
+                        {
+                            case 1:
+                                GestionReservation.AjouterReservation();
+                                break;
+                            case 2:
+                                GestionReservation.ChangerStatut();
+                                break;
+                            case 3:
+                                choixSousMenu = 0;
+                                break;
+                        }
+                    } while (choixSousMenu != 0);
+                }
+                else if(choix == 3)
+                {
+                    Environment.Exit(0);
+                }
+            } while (choix != 0);
 
-            GestionReservation.AjouterReservation();
+        }
+        static void afficherMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("1- Gestion des Clients\n2- Gestion des réservations\n3- Quitter");
+        }
 
-            GestionReservation.AjouterReservation();
+        static void afficherMenuClients()
+        {
+            Console.WriteLine("1- Affichage des Clients\n2- Ajout d'un nouveau client\n3- Supprimer un client\n4- Retour");
 
-            GestionReservation.ChangerStatut();
+        }
 
-            GestionClients.AffichageListeClient();
+        static void afficherMenuReservations()
+        {
+            Console.WriteLine("1- Ajouter une réservation\n2- Changer de statut\n3- Retour");
         }
     }
 }

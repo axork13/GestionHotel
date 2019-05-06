@@ -11,6 +11,8 @@ namespace GestionHotel.Classes
 
         public static void AjouterClient()
         {
+            Console.Clear();
+
             string nom, adresse, tel;
             Console.WriteLine("Quel est votre nom ?");
             nom = Console.ReadLine();
@@ -19,20 +21,25 @@ namespace GestionHotel.Classes
             Console.WriteLine("Quel est votre numéro de téléphone ?");
             tel = Console.ReadLine();
             clients.Add(new Client(getNextId(), nom, adresse, tel));
+            AffichageListeClient();
         }
 
         public static void SupprimerClient()
         {
+            Console.Clear();
+            AffichageListeClient();
             Console.WriteLine("Quel est le numéro du client à supprimer ?");
             int id = Convert.ToInt32(Console.ReadLine());
 
             Client client = clients.SingleOrDefault(c => c.IdClient == id);
             if (client != null) clients.Remove(client);
             else Console.WriteLine("Ce client n'existe pas");
+            AffichageListeClient();
         }
 
         public static void AffichageListeClient()
         {
+            Console.Clear();
             if (clients.Count > 0)
             {
                 foreach (Client c in clients)
@@ -45,6 +52,7 @@ namespace GestionHotel.Classes
             {
                 Console.WriteLine("Il n'y a pas de clients");
             }
+            Console.WriteLine();
         }
 
         static int getNextId()

@@ -11,20 +11,26 @@ namespace GestionHotel.Classes
 
         public static void AjouterReservation()
         {
+            Console.Clear();
+
             Console.WriteLine("Quel est le numéro du client ?");
             int idClient = Convert.ToInt32(Console.ReadLine());
 
             reservations.Add(new Reservation(getNextCode(), idClient));
+            GestionClients.AffichageListeClient();
         }
 
         public static void ChangerStatut()
         {
+            Console.Clear();
+
             Console.WriteLine("Quel est le numéro du client ?");
             int id = Convert.ToInt32(Console.ReadLine());
 
             Reservation reservation = reservations.SingleOrDefault(r => r.IdClient == id);
             if (reservation != null) reservation.ChangerStatut();
             else Console.WriteLine("Il n'y a pas de réservation pour ce client");
+            GestionClients.AffichageListeClient();
         }
 
         public static void Afficher(int id)
