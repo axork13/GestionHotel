@@ -25,7 +25,7 @@ namespace GestionHotel.Classes
         {
             Console.WriteLine("Quel est le numéro du client à supprimer ?");
             int id = Convert.ToInt32(Console.ReadLine());
-           
+
             Client client = clients.SingleOrDefault(c => c.IdClient == id);
             if (client != null) clients.Remove(client);
             else Console.WriteLine("Ce client n'existe pas");
@@ -38,6 +38,7 @@ namespace GestionHotel.Classes
                 foreach (Client c in clients)
                 {
                     c.AfficherClient();
+                    GestionReservation.Afficher(c.IdClient);
                 }
             }
             else

@@ -20,7 +20,14 @@ namespace GestionHotel
             GestionClients.SupprimerClient();
 
             GestionClients.AffichageListeClient();
-            
+
+            GestionReservation.AjouterReservation();
+
+            GestionReservation.AjouterReservation();
+
+            GestionReservation.ChangerStatut();
+
+            GestionClients.AffichageListeClient();
         }
     }
 }
