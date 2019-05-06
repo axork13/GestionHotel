@@ -14,13 +14,31 @@ namespace GestionHotel.Classes
             Console.Clear();
 
             string nom, adresse, tel;
+
             Console.WriteLine("Quel est votre nom ?");
             nom = Console.ReadLine();
             Console.WriteLine("Quel est votre adresse ?");
             adresse = Console.ReadLine();
             Console.WriteLine("Quel est votre numéro de téléphone ?");
             tel = Console.ReadLine();
-            clients.Add(new Client(getNextId(), nom, adresse, tel));
+
+            try
+            {
+                clients.Add(new Client(getNextId(), nom, adresse, tel));
+            }
+            catch (NameEmptyOrNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (AdresseEmptyOrNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (TelFormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             AffichageListeClient();
         }
 
@@ -32,34 +50,52 @@ namespace GestionHotel.Classes
             int id = Convert.ToInt32(Console.ReadLine());
 
             Client client = clients.SingleOrDefault(c => c.IdClient == id);
-            if (client != null) clients.Remove(client);
-            else Console.WriteLine("Ce client n'existe pas");
-            AffichageListeClient();
+            try
+            {
+                if (client != null) clients.Remove(client);
+                else throw new ClientInexistantException();
+            }
+            catch (ClientInexistantException e)
+            {
+                Console.WriteLine(e.Message + " avec un identifiant " + id);
+            }
+            
+            //AffichageListeClient();
         }
 
         public static void AffichageListeClient()
         {
-            Console.Clear();
-            if (clients.Count > 0)
+           //Console.Clear();
+
+            try
             {
-                foreach (Client c in clients)
+                if (clients.Count > 0)
                 {
-                    c.AfficherClient();
-                    GestionReservation.Afficher(c.IdClient);
+                    foreach (Client c in clients)
+                    {
+                        c.AfficherClient();
+                        GestionReservation.Afficher(c.IdClient);
+                    }
+                }
+                else
+                {
+                    throw new ClientInexistantException();
                 }
             }
-            else
+            catch (ClientInexistantException e)
             {
-                Console.WriteLine("Il n'y a pas de clients");
+                Console.WriteLine(e.Message);
             }
+
             Console.WriteLine();
+
         }
 
         static int getNextId()
         {
             int id = 0;
             if (clients.Count > 0) id = clients.Count;
-            
+
             return id + 1;
         }
     }
