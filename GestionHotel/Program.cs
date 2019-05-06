@@ -1,4 +1,5 @@
 ﻿using System;
+using GestionHotel.Classes;
 
 namespace GestionHotel
 {
@@ -6,7 +7,20 @@ namespace GestionHotel
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            GestionClients.AffichageListeClient();
+
+            GestionClients.AjouterClient();
+
+            GestionClients.AjouterClient();
+
+            GestionClients.AjouterClient();
+
+            GestionClients.AffichageListeClient();
+
+            GestionClients.SupprimerClient();
+
+            GestionClients.AffichageListeClient();
+            
         }
     }
 }

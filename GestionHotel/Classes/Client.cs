@@ -19,6 +19,11 @@ namespace GestionHotel.Classes
             this.TelClient = telClient;
         }
 
+        public void AfficherClient()
+        {
+            Console.WriteLine("Id: " + idClient + " - Nom: " + nomClient + " - Adresse: " + adresseClient + " - Téléphone: " + telClient);
+        }
+
         public int IdClient { get => idClient; set => idClient = value; }
         public string NomClient { get => nomClient; set => nomClient = value; }
         public string AdresseClient { get => adresseClient; set => adresseClient = value; }
