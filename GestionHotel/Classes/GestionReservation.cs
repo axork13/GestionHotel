@@ -8,16 +8,30 @@ namespace GestionHotel.Classes
     public static class GestionReservation
     {
         public static List<Reservation> reservations = new List<Reservation>();
+        public static int maxReservation = 2;
 
         public static void AjouterReservation()
         {
             Console.Clear();
+            try
+            {
+                if (reservations.Count < maxReservation)
+                {
+                    Console.WriteLine("Quel est le numéro du client ?");
+                    int idClient = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Quel est le numéro du client ?");
-            int idClient = Convert.ToInt32(Console.ReadLine());
-
-            reservations.Add(new Reservation(getNextCode(), idClient));
-            GestionClients.AffichageListeClient();
+                    reservations.Add(new Reservation(getNextCode(), idClient));
+                    GestionClients.AffichageListeClient();
+                }
+                else
+                {
+                    throw new OutOfReservationException();
+                }
+            }
+            catch (OutOfReservationException e)
+            {
+                Console.WriteLine(e.Message);
+            }   
         }
 
         public static void ChangerStatut()
